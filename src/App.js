@@ -1,13 +1,20 @@
-import MemoTemPlate from './Component/MemoTemPlate';
+import { useCallback } from 'react';
 import MemoInput from './Component/MemoInput';
-import MemoList from './Component/MemoList';
+import MemoTemPlate from './Component/MemoTemPlate';
 
 function App() {
+
+  // const handleInsert = useCallback((text) => {
+  //   const todo = {
+      
+  //   }
+  // })
+
+
+  
   return (
     <MemoTemPlate>
-      <MemoInput />
-      <MemoList />
-      
+      {/* <MemoInput onInsert={handleInsert}/> */}
     </MemoTemPlate>
   );
 }
