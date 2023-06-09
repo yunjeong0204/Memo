@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { MdAdd as AddIcon } from "react-icons/md";
 
-
-const MemoWrapper = styled.form`
+const MemoInputWrapper = styled.form`
    display: flex;
    background: gray;
 `;
 
-const MemoInput = styled.input`
+const StyledInput = styled.input`
    background: none;
    outline: none;
    border: none;
@@ -15,21 +15,31 @@ const MemoInput = styled.input`
    font-size: 1.125rem;
    line-height: 1.5;
    color: white;
+   flex: 1;
 
    &::placeholder{
       color: white;
    }
 `;
 
+// 버튼
+const StyledButton = styled.button`
+   background: lightblue;
+   border: none;
+   color: white;
+   padding: 0 1rem;
+   font-size: 1.5rem;
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   `;
 
-
-function MemoInput() {
+function MemoInput({onInsert}) {
    const [value, setValue] = useState('');
 
    const handleChange = (e) => {
       setValue(e.target.value);
    };
-
 
    const handleSubmit = (e) => {
       onInsert(value);
@@ -38,16 +48,20 @@ function MemoInput() {
       e.preventDefault();
    };
 
+
    return(
-      <MemoWrapper onSubmit={handleSubmit}>  
-         <MemoInput
+      <MemoInputWrapper onSubmit={handleSubmit}>  
+         <StyledInput
             type='text' 
-            placeholder='메모를 입력하세요' 
+            placeholder='메모 입력' 
             value={value} 
             onChange={handleChange}
-         />
+            />
+         <StyledButton type='submit'>
+            <AddIcon />
+         </StyledButton>
 
-      </MemoWrapper>
+      </MemoInputWrapper>
    );
 }
 export default MemoInput;
