@@ -3,9 +3,12 @@ import React, { useContext } from 'react';import ThemeContext from './ThemeConte
 
 function ThemeMain(props) {
   const {theme, themeList ,toggleTheme} = useContext(ThemeContext);
-
+  
+  // 버튼 내용
+  // const [buttontext, setbuttontext] = useState();
   
   return (
+    // 
     <div
       style={{
         width: '512px',
