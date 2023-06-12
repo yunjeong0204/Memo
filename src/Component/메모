@@ -1,6 +1,49 @@
-테마변경
+배경
 ThemeContext.Provider > ThemeMain
 MemoTemPlate >ThemeChange 
 ----------------------
 MemoTemPlate > Themebutton onClick={toggleTheme}
  > ThemeContext.Provider > ThemeMain
+
+
+<MemoTemPlate>
+  <ThemeChange /> 테마 밑으로 메모창
+  <MemoInput onInsert={handleInput}/>
+  <MemoList memos={memos} 
+    onRemove = {handleRemove}
+    onToggle = {handleToggle}/>
+</MemoTemPlate>
+
+
+
+APP()
+const [toggleBtn, setToggleBtn] = useState(true);
+// 버튼 클릭 시 올라가는 
+  const goToTop = () => {
+    window.scrollTo({ top: 0 });
+  };
+
+  return toggleBtn ? (
+    <div onClick={goToTop}>
+		// ... //
+    </div>
+  ) 
+
+<Route element={<MemoTemPlate />}/>
+
+if (email.length > 0) {
+  setEmail((currentValue) => currentValue);
+
+  // 정규식 표현으로 유효성 검사(Regular Expression)
+  const emailRegEx = /^([a-z0-9_\.-]+)@([\da-z-]+)\.([a-z\.]{2,6})$/;
+
+  if (!emailRegEx.test(email)) {
+	setEmailMessage("이메일 형식이 틀렸습니다. 다시 입력해주세요.");
+    setIsEmail(false);
+  } else {
+    setEmailMessage("이메일이 정상적으로 입력되었습니다.");
+    setIsEmail(true);
+  }
+}
+
+

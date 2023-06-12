@@ -31,6 +31,11 @@ const Text = styled.div`
   } 
 `;
 
+// 날짜
+const Datetext = styled.div`
+  right: 0;
+`;
+
 // 삭제
 const Remove = styled.div`
   display: flex;
@@ -45,9 +50,9 @@ const Remove = styled.div`
 `;
 
 function MemoListItem(props) {
-  const { memo : { id, text, checked }, onRemove, onToggle} = props;
+  const { memo : { id, text, checked, data}, onRemove, onToggle} = props;
   // console.log(id);
-  
+
   return (
     <MemoListItemWrapper>
       <Checkbox checked={checked}
@@ -56,6 +61,7 @@ function MemoListItem(props) {
       </Checkbox>
 
       <Text checked={checked}>{text}</Text>
+      <Datetext>{data}</Datetext>
 
       <Remove onClick={() => {onRemove(id);}}>
         <MdRemoveCircleOutline />

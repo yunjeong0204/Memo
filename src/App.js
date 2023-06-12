@@ -17,8 +17,26 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [memos, setMemos] = useState([]);
+  // 버튼 상단
+  // const [toggleBtn, setToggleBtn] = useState(true);
+  // const handleScroll = () => {
+  //   const {scrollY} = window;
+  //   scrollY > 200 ? setToggleBtn(false) : setToggleBtn(true);
+  // }
 
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll)
+  // }, [toggleBtn]);
+
+  // const togo = () => {
+  //   window.scrollTo({top: 0});
+  // }
+
+  // --------------------------------------------------------
+
+  
+
+  const [memos, setMemos] = useState([]);
   useEffect(() => {
     const dbMemos = JSON.parse(localStorage.getItem('memos')) || [];
     setMemos(dbMemos);
@@ -28,14 +46,20 @@ function App() {
     localStorage.setItem('memos', JSON.stringify(memos)); 
   }, [memos]);
 
-
   const nextId = useRef(4);
 
   const handleInput = useCallback((text) => {
+    // 날짜
+    const d = new Date();
+    const d2 = d.getFullYear() + "-" + (d.getMonth() +1) + "-"+ d.getDate();
+    
     const memo = {
       id: uuidv4(),
       text ,
-      checked: false
+      checked: false,
+
+      // 날짜
+      data: d2
     }; 
 
     const copyMemos = [...memos];
@@ -48,14 +72,17 @@ function App() {
 
   // onRemove
   const handleRemove = useCallback((id) => {
-    const copyMemos = [...memos];
-    const targetIndex = memos.findIndex((memo) => memo.id === id);
-    copyMemos.splice(targetIndex, 1);
-    setMemos(copyMemos);
+    if (window.confirm('삭제하시겠습니까?')) {
+      const copyMemos = [...memos];
+      const targetIndex = memos.findIndex((memo) => memo.id === id);
+      copyMemos.splice(targetIndex, 1);
+      setMemos(copyMemos);  
+    } 
   }, [memos]); 
 
   //onToogle 
   const handleToggle = useCallback((id) => {
+
     const copyMemos = [...memos];
     const target = memos.find((memo) => memo.id === id);
     target.checked = !target.checked;
@@ -64,18 +91,32 @@ function App() {
     setMemos(copyMemos);
   }, [memos]);
 
+
   
   return (
     <>
       <GlobalStyle />
+      <ThemeChange/>
+      {/* <ThemeChange> 테마 */}
       <MemoTemPlate>
-        <ThemeChange />
         <MemoInput onInsert={handleInput}/>
         <MemoList memos={memos} 
           onRemove = {handleRemove}
-          onToggle = {handleToggle}/>
+          onToggle = {handleToggle} 
+
+          // ----------
+          // onClick= {togo}
+        />
+
+        
+
       </MemoTemPlate>
+      {/* </ThemeChange>  */}
+      
+
     </>
+
+    
   );
 }
 

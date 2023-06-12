@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { MdAdd as AddIcon } from "react-icons/md";
 
 const MemoInputWrapper = styled.form`
    display: flex;
-   background: gray;
+   background: #e7ebdf;
 `;
 
 const StyledInput = styled.input`
@@ -14,11 +13,11 @@ const StyledInput = styled.input`
    padding: 0.5rem;
    font-size: 1.125rem;
    line-height: 1.5;
-   color: white;
+   color: black;
    flex: 1;
 
    &::placeholder{
-      color: white;
+      color: black;
    }
 `;
 
@@ -28,7 +27,6 @@ const StyledButton = styled.button`
    border: none;
    color: white;
    padding: 0 1rem;
-   font-size: 1.5rem;
    display: flex;
    align-items: center;
    cursor: pointer;
@@ -37,29 +35,40 @@ const StyledButton = styled.button`
 function MemoInput({onInsert}) {
    const [value, setValue] = useState('');
 
+   // 버튼 상단
+   // const Login = async()=> {
+   //    try {
+         
+   //    } catch (err) {
+   //       setValue(true);
+   //       alert('경고')
+   //    };
+   // }
+
    const handleChange = (e) => {
       setValue(e.target.value);
    };
 
    const handleSubmit = (e) => {
-      onInsert(value);
-      setValue(''); 
-
+      if (window.confirm('등록하시겠습니까?')) {
+         onInsert(value);
+         setValue(''); 
+      } else (
+         alert('취소되었습니다.')
+      );
       e.preventDefault();
    };
 
 
    return(
-      <MemoInputWrapper onSubmit={handleSubmit}>  
+      <MemoInputWrapper onSubmit={handleSubmit} >  
          <StyledInput
             type='text' 
             placeholder='메모 입력' 
             value={value} 
             onChange={handleChange}
             />
-         <StyledButton type='submit'>
-            <AddIcon />
-         </StyledButton>
+         <StyledButton type='submit'>등록</StyledButton>
 
       </MemoInputWrapper>
    );
