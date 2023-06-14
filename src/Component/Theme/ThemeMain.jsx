@@ -11,7 +11,8 @@ function ThemeMain(props) {
     // 
     <div
       style={{
-        width: '512px',
+        width: '100%',
+        height: '100px',
 
         backgroundColor: themeList[theme].background,
         color: themeList[theme].foreground
