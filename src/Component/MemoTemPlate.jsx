@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThemeContext from './Theme/ThemeContext';
-import ThemeChange from './Theme/ThemeChange';
 import ThemeMain from './Theme/ThemeMain';
+import { MdModeNight as AddIcon } from "react-icons/md";
+
 
 const MemoWrapper = styled.div`
   position: relative;
@@ -27,54 +28,48 @@ const MemoWrapper = styled.div`
   .content{
     background: #fafac0;
   }
-
-/* 이전 시 필요한 버튼  */
-  /* .btn{
-    width: 50px;
-    height: 30px;
-  } */
 `;
 
 
-const themeList = {
-  light: {
-    foreground: '#000000',
-    background: '#eeeeee'
-  },
-  dark: {
-    foreground: '#ffffff',
-    background: '#222222'
-  }
-}
-
+// theme
+// const themeList = {
+//   light: {
+//     foreground: '#000000',
+//     background: '#eeeeee'
+//   },
+//   dark: {
+//     foreground: '#ffffff',
+//     background: '#222222'
+//   }
+// }
 
 function MemoTemPlate(props) { 
   const {children} = props;
 
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('light');
-    }
-  }
+  // theme
+  // const [theme, setTheme] = useState('light');
+  // const toggleTheme = () => {
+  //   if (theme === 'light') {
+  //     setTheme('dark');
+  //   } else if (theme === 'dark') {
+  //     setTheme('light');
+  //   }
+  // }
 
 
   return (
-    <ThemeContext.Provider value={{theme, themeList, toggleTheme}}>
-
+    // <ThemeContext.Provider value={{theme, themeList, toggleTheme}}>
+      // <ThemeMain>
       <MemoWrapper>
-        <ThemeMain />
-        
-        {/* <div className='btn'> 이전 </div> */}
+        {/* <AddIcon onClick={toggleTheme}/> */}
         <div className='title'>memo</div>
         <div className='content'>{children}</div>
       </MemoWrapper>
 
 
-    </ThemeContext.Provider> 
+      // </ThemeMain>
+
+    // </ThemeContext.Provider> 
 
 
 

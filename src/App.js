@@ -5,7 +5,9 @@ import MemoList from './Component/MemoList';
 import reset from "styled-reset";
 import { v4 as uuidv4 } from "uuid";
 import { createGlobalStyle } from 'styled-components';
-import ThemeChange from './Component/Theme/ThemeChange';
+import ThemeContext from './Component/Theme/ThemeContext';
+import { MdModeNight as AddIcon } from "react-icons/md";
+import ThemeMain from './Component/Theme/ThemeMain';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -16,27 +18,60 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+// const themeList = {
+//   light: {
+//     foreground: '#000000',
+//     background: '#eeeeee'
+//   },
+//   dark: {
+//     foreground: '#ffffff',
+//     background: '#222222'
+//   }
+// }
+
+
+// theme
+const themeList = {
+  light: {
+    foreground: '#000000',
+    background: '#eeeeee'
+  },
+  dark: {
+    foreground: '#ffffff',
+    background: '#222222'
+  }
+}
+
 function App() {
-  // 버튼 상단
-  // const [toggleBtn, setToggleBtn] = useState(true);
+  const [memos, setMemos] = useState([]);
+
+
+  //theme
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else if (theme === 'dark') {
+      setTheme('light');
+    }
+  }
+
+
+  // --------------------------
   // const handleScroll = () => {
   //   const {scrollY} = window;
-  //   scrollY > 200 ? setToggleBtn(false) : setToggleBtn(true);
+  //   scrollY > 200 ? setMemos(false) : setMemos(true);
   // }
 
   // useEffect(() => {
   //   window.addEventListener("scroll", handleScroll)
-  // }, [toggleBtn]);
+  // }, [memos]);
 
   // const togo = () => {
   //   window.scrollTo({top: 0});
   // }
+  // ---------------------------
 
-  // --------------------------------------------------------
-
-  
-
-  const [memos, setMemos] = useState([]);
   useEffect(() => {
     const dbMemos = JSON.parse(localStorage.getItem('memos')) || [];
     setMemos(dbMemos);
@@ -49,6 +84,7 @@ function App() {
   const nextId = useRef(4);
 
   const handleInput = useCallback((text) => {
+    
     // 날짜
     const d = new Date();
     const d2 = d.getFullYear() + "-" + (d.getMonth() +1) + "-"+ d.getDate();
@@ -95,25 +131,24 @@ function App() {
   
   return (
     <>
-      <GlobalStyle />
-      <ThemeChange/>
-      {/* <ThemeChange> 테마 */}
-      <MemoTemPlate>
-        <MemoInput onInsert={handleInput}/>
-        <MemoList memos={memos} 
-          onRemove = {handleRemove}
-          onToggle = {handleToggle} 
+      <ThemeContext.Provider value={{theme, themeList, toggleTheme}}>
+        {/*  */}
+        {/* <ThemeMain></ThemeMain> */}
+        <ThemeMain />
+        <GlobalStyle />
+          <MemoTemPlate>
+            <MemoInput onInsert={handleInput}/>
+            <MemoList memos={memos} 
+              onRemove = {handleRemove}
+              onToggle = {handleToggle} 
 
-          // ----------
-          // onClick= {togo}
-        />
+              // ----------
+              // onClick= {togo}
+              // onChange = {togo}
+            />
+          </MemoTemPlate>
 
-        
-
-      </MemoTemPlate>
-      {/* </ThemeChange>  */}
-      
-
+      </ThemeContext.Provider>
     </>
 
     

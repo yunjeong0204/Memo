@@ -1,26 +1,23 @@
 import React, { useContext } from 'react';import ThemeContext from './ThemeContext';
+import MemoTemPlate from '../MemoTemPlate';
+import { MdModeNight as AddIcon } from "react-icons/md";
+
 
 
 function ThemeMain(props) {
   const {theme, themeList ,toggleTheme} = useContext(ThemeContext);
-  
-  // 버튼 내용
-  // const [buttontext, setbuttontext] = useState();
-  
+    
   return (
     // 
-    <div
+    <AddIcon onClick={toggleTheme}
       style={{
         width: '100%',
-        height: '100px',
 
         backgroundColor: themeList[theme].background,
         color: themeList[theme].foreground
       }}>
-
-      <button onClick={toggleTheme}>테마변경</button>
       
-    </div>
+    </AddIcon>
   );
 }
 

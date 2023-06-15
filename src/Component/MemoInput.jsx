@@ -35,28 +35,17 @@ const StyledButton = styled.button`
 function MemoInput({onInsert}) {
    const [value, setValue] = useState('');
 
-   // 버튼 상단
-   // const Login = async()=> {
-   //    try {
-         
-   //    } catch (err) {
-   //       setValue(true);
-   //       alert('경고')
-   //    };
-   // }
-
    const handleChange = (e) => {
       setValue(e.target.value);
    };
 
    const handleSubmit = (e) => {
-      if (window.confirm('등록하시겠습니까?')) {
+      if (!value) {
+         e.preventDefault();
+      } else {
          onInsert(value);
          setValue(''); 
-      } else (
-         alert('취소되었습니다.')
-      );
-      e.preventDefault();
+      }
    };
 
 

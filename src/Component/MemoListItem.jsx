@@ -58,6 +58,8 @@ function MemoListItem(props) {
       <Checkbox checked={checked}
       onClick={() => {onToggle(id);}}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+        {/*  */}
+        {/* {checked: } */}
       </Checkbox>
 
       <Text checked={checked}>{text}</Text>

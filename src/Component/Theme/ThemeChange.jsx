@@ -13,6 +13,7 @@ import ThemeMain from './ThemeMain';
 //   }
 // }
 
+
 function ThemeChange(props) {
   // const [theme, setTheme] = useState('light');
 
@@ -27,10 +28,10 @@ function ThemeChange(props) {
 
   return (
     <>
+      {/* <ThemeProvider value={{theme, themeList, toggleTheme}}>
+        <ThemeMain />
+      </ThemeProvider> */}
     </>
-    // <ThemeContext.Provider value={{theme, themeList, toggleTheme}}>
-    //   <ThemeMain />
-    // </ThemeContext.Provider>
   );
 }
 
