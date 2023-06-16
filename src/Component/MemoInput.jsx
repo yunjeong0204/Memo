@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const MemoInputWrapper = styled.form`
    display: flex;
-   background: #e7ebdf;
+   background: #ffffc5;
 `;
 
 const StyledInput = styled.input`
@@ -13,7 +13,7 @@ const StyledInput = styled.input`
    padding: 0.5rem;
    font-size: 1.125rem;
    line-height: 1.5;
-   color: black;
+   color: #7a7672;
    flex: 1;
 
    &::placeholder{
@@ -23,7 +23,7 @@ const StyledInput = styled.input`
 
 // 버튼
 const StyledButton = styled.button`
-   background: lightblue;
+   background: #887674;
    border: none;
    color: white;
    padding: 0 1rem;
@@ -40,12 +40,11 @@ function MemoInput({onInsert}) {
    };
 
    const handleSubmit = (e) => {
-      if (!value) {
-         e.preventDefault();
-      } else {
+      e.preventDefault(); //e.preventDefault 새로고침 막게함
+      if (value) {
          onInsert(value);
          setValue(''); 
-      }
+      } 
    };
 
 
@@ -58,7 +57,6 @@ function MemoInput({onInsert}) {
             onChange={handleChange}
             />
          <StyledButton type='submit'>등록</StyledButton>
-
       </MemoInputWrapper>
    );
 }

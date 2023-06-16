@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { MdCheckBox, MdCheckBoxOutlineBlank, MdRemoveCircleOutline } from "react-icons/md";
+import { MdCheckBox, MdCheckBoxOutlineBlank, MdRemoveCircleOutline} from "react-icons/md";
 
 const MemoListItemWrapper = styled.div`
   padding: 1rem;
@@ -36,6 +36,13 @@ const Datetext = styled.div`
   right: 0;
 `;
 
+//수정
+const Edit = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
 // 삭제
 const Remove = styled.div`
   display: flex;
@@ -43,10 +50,6 @@ const Remove = styled.div`
   font-size: 1.5rem;
   color: red;
   cursor: pointer;
-
-  &:hover{
-    color: #ff8787;
-  }
 `;
 
 function MemoListItem(props) {
@@ -58,13 +61,19 @@ function MemoListItem(props) {
       <Checkbox checked={checked}
       onClick={() => {onToggle(id);}}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-        {/*  */}
-        {/* {checked: } */}
       </Checkbox>
 
       <Text checked={checked}>{text}</Text>
-      <Datetext>{data}</Datetext>
 
+      {/* 날짜 */}
+      <Datetext>{data}</Datetext> 
+
+      {/* 수정 */}
+      <Edit>
+        수정
+      </Edit>
+
+      {/* 삭제 */}
       <Remove onClick={() => {onRemove(id);}}>
         <MdRemoveCircleOutline />
       </Remove>

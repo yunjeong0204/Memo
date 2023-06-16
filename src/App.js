@@ -6,7 +6,6 @@ import reset from "styled-reset";
 import { v4 as uuidv4 } from "uuid";
 import { createGlobalStyle } from 'styled-components';
 import ThemeContext from './Component/Theme/ThemeContext';
-import { MdModeNight as AddIcon } from "react-icons/md";
 import ThemeMain from './Component/Theme/ThemeMain';
 
 
@@ -17,18 +16,6 @@ const GlobalStyle = createGlobalStyle`
     background: white;
   }
 `;
-
-// const themeList = {
-//   light: {
-//     foreground: '#000000',
-//     background: '#eeeeee'
-//   },
-//   dark: {
-//     foreground: '#ffffff',
-//     background: '#222222'
-//   }
-// }
-
 
 // theme
 const themeList = {
@@ -46,7 +33,7 @@ function App() {
   const [memos, setMemos] = useState([]);
 
 
-  //theme
+  //theme 테마변경
   const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -55,22 +42,6 @@ function App() {
       setTheme('light');
     }
   }
-
-
-  // --------------------------
-  // const handleScroll = () => {
-  //   const {scrollY} = window;
-  //   scrollY > 200 ? setMemos(false) : setMemos(true);
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll)
-  // }, [memos]);
-
-  // const togo = () => {
-  //   window.scrollTo({top: 0});
-  // }
-  // ---------------------------
 
   useEffect(() => {
     const dbMemos = JSON.parse(localStorage.getItem('memos')) || [];
@@ -105,7 +76,6 @@ function App() {
     nextId.current += 1;
   }, [memos]);
 
-
   // onRemove
   const handleRemove = useCallback((id) => {
     if (window.confirm('삭제하시겠습니까?')) {
@@ -118,7 +88,6 @@ function App() {
 
   //onToogle 
   const handleToggle = useCallback((id) => {
-
     const copyMemos = [...memos];
     const target = memos.find((memo) => memo.id === id);
     target.checked = !target.checked;
@@ -127,32 +96,19 @@ function App() {
     setMemos(copyMemos);
   }, [memos]);
 
-
-  
   return (
     <>
+      <GlobalStyle />
       <ThemeContext.Provider value={{theme, themeList, toggleTheme}}>
-        {/*  */}
-        {/* <ThemeMain></ThemeMain> */}
-        <ThemeMain />
-        <GlobalStyle />
-          <MemoTemPlate>
-            <MemoInput onInsert={handleInput}/>
-            <MemoList memos={memos} 
-              onRemove = {handleRemove}
-              onToggle = {handleToggle} 
-
-              // ----------
-              // onClick= {togo}
-              // onChange = {togo}
-            />
-          </MemoTemPlate>
-
+      <ThemeMain />
+        <MemoTemPlate>
+          <MemoInput onInsert={handleInput}/>
+          <MemoList memos={memos} 
+            onRemove = {handleRemove}
+            onToggle = {handleToggle}/>
+        </MemoTemPlate>
       </ThemeContext.Provider>
     </>
-
-    
   );
 }
-
 export default App;
